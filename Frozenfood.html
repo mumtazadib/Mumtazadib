@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FrozenFood - Pemikiran Segar Tentang Makanan Beku</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #2a6e3f;
+            --secondary: #d32f2f;
+            --accent: #ff9800;
+            --light: #f8f9fa;
+            --dark: #333;
+            --gray: #777;
+            --light-gray: #eee;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #fff;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigasi */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #b71c1c;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Kategori Produk Section */
+        .categories {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .category-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .category-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .category-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .category-content {
+            padding: 25px;
+        }
+
+        .category-content h3 {
+            font-size: 22px;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .category-content p {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        /* Tentang Kami Section */
+        .about {
+            padding: 80px 0;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            color: var(--gray);
+            margin-bottom: 30px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-item {
+            padding: 20px;
+            background-color: var(--light);
+            border-radius: 8px;
+        }
+
+        .feature-item h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .feature-item p {
+            font-size: 14px;
+            margin-bottom: 0;
+        }
+
+        .about-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Layanan Section */
+        .services {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+
+        .service-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: white;
+            padding: 40px 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+
+        .service-card:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .service-card:hover h3,
+        .service-card:hover p {
+            color: white;
+        }
+
+        .service-icon {
+            font-size: 40px;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .service-card p {
+            color: var(--gray);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 70px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 25px;
+            color: white;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--secondary);
+        }
+
+        .footer-column p {
+            color: #bbb;
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+
+        .news-item {
+            display: flex;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+
+        .news-date {
+            background-color: var(--secondary);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-align: center;
+            margin-right: 15px;
+            font-weight: 600;
+        }
+
+        .news-text {
+            color: #bbb;
+            font-size: 14px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            color: #bbb;
+            font-size: 14px;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-image {
+                order: -1;
+            }
+            
+            .hero h1 {
+                font-size: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 15px;
+            }
+            
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+                padding: 20px;
+            }
+            
+            nav ul.active {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero {
+                padding: 70px 20px;
+            }
+            
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigasi -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">Freeze<span>Meal</span></a>
+            
+            <div class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <nav>
+                <ul id="mainMenu">
+                    <li><a href="#home">Beranda</a></li>
+                    <li><a href="#about">Tentang Kami</a></li>
+                    <li><a href="#products">Produk</a></li>
+                    <li><a href="#services">Layanan</a></li>
+                    <li><a href="#links">Tautan</a></li>
+                    <li><a href="#contact">Kontak</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Waktunya untuk Pemikiran Segar Tentang Frozen Food</h1>
+            <p>Kami hadir dengan latar belakang pengalaman yang kuat dalam pasar makanan beku yang transparan dan dapat diandalkan. Dengan komitmen untuk memberikan kualitas terbaik dan layanan yang memuaskan.</p>
+            <a href="#products" class="btn">Jelajahi Produk Kami</a>
+        </div>
+    </section>
+
+    <!-- Kategori Produk Section -->
+    <section class="categories" id="products">
+        <div class="container">
+            <div class="section-title">
+                <h2>Selamat Datang di Freeze Meal!</h2>
+                <p>Sebagai pemimpin dalam industri makanan beku, kami bangga menawarkan produk-produk berkualitas tinggi yang diproses dengan teknologi terkini untuk menjaga kesegaran dan nutrisi.</p>
+            </div>
+            
+            <div class="category-container">
+                <div class="category-card">
+                    <img src="Download Free Vectors, Images, Photos & Videos _ Vecteezy.jpg" alt="Buah & Beri" class="category-img">
+                    <div class="category-content">
+                        <h3>Buah & Beri</h3>
+                        <p>Kami menawarkan berbagai macam buah dan beri beku yang dipetik pada puncak kematangannya. Dengan proses pembekuan cepat, vitamin dan rasa alami buah tetap terjaga sempurna untuk dinikmati kapan saja.</p>
+                        <a href="#" class="btn">Lihat Produk</a>
+                    </div>
+                </div>
+                
+                <div class="category-card">
+                    <img src="Frozen beef products sold at Target and Walmart recalled due to undeclared allergens.jpg" alt="Daging & Unggas" class="category-img">
+                    <div class="category-content">
+                        <h3>Daging & Unggas</h3>
+                        <p>Produk daging dan unggas kami diproses dengan standar higienis tertinggi. Dibekukan segera setelah pemotongan untuk memastikan kesegaran, keamanan, dan kualitas yang optimal untuk masakan Anda.</p>
+                        <a href="#" class="btn">Lihat Produk</a>
+                    </div>
+                </div>
+                
+                <div class="category-card">
+                    <img src="Pangasiusfilet - 170_230g.jpg" alt="Ikan & Seafood" class="category-img">
+                    <div class="category-content">
+                        <h3>Ikan & Seafood</h3>
+                        <p>Dari laut langsung ke freezer Anda. Produk ikan dan seafood kami ditangkap dengan metode berkelanjutan dan segera dibekukan untuk menjaga tekstur, rasa, dan nutrisi yang sempurna.</p>
+                        <a href="#" class="btn">Lihat Produk</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tentang Kami Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Pengolahan & Pembekuan Modern</h2>
+                    <p>Solusi Terbaik Berdasarkan Pengalaman Bertahun-tahun. Kami mengombinasikan teknologi pembekuan terkini dengan pengetahuan tradisional untuk menghasilkan produk makanan beku berkualitas tinggi.</p>
+                    <p>Setiap produk kami melalui proses penyeleksian bahan baku yang ketat, pengolahan yang higienis, dan pembekuan cepat yang menjaga nutrisi dan rasa alami makanan.</p>
+                    
+                    <div class="features">
+                        <div class="feature-item">
+                            <h4>Ekspor Buah Internasional</h4>
+                            <p>Kami mengekspor buah beku berkualitas ke berbagai negara dengan standar ekspor internasional yang ketat.</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>Pizza Beku Premium</h4>
+                            <p>Pizza beku kami dibuat dengan bahan-bahan pilihan dan resep rahasia yang membuatnya istimewa.</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>Makanan Khusus Diet</h4>
+                            <p>Kami menyediakan berbagai makanan beku khusus untuk kebutuhan diet dan kesehatan tertentu.</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>Ikan & Kerang Segar</h4>
+                            <p>Produk perikanan kami ditangani dengan sistem rantai dingin yang menjaga kesegaran dari laut ke meja makan.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-image">
+                    <img src="_Land of beef_ by Peter Lippmann.jpg" alt="Pengolahan Makanan Beku">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Layanan Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Layanan Unggulan Kami</h2>
+                <p>Kami menyediakan berbagai layanan komprehensif untuk memenuhi kebutuhan makanan beku Anda dengan standar kualitas tertinggi dan kepuasan pelanggan yang utama.</p>
+            </div>
+            
+            <div class="service-container">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <h3>Pengiriman Cepat & Dingin</h3>
+                    <p>Kami memastikan pengiriman produk beku tepat waktu dengan sistem pendingin khusus untuk menjaga kesegaran dan kualitas hingga sampai di tangan Anda.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-temperature-low"></i>
+                    </div>
+                    <h3>Teknologi Pembekuan Modern</h3>
+                    <p>Menggunakan teknologi pembekuan canggih yang menjaga nutrisi, tekstur, dan rasa alami semua produk makanan beku kami.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3>Kontrol Kualitas Ketat</h3>
+                    <p>Pemeriksaan kualitas ketat di setiap tahap produksi untuk memastikan standar keamanan dan kualitas pangan yang tertinggi.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Dukungan Pelanggan 24/7</h3>
+                    <p>Tim dukungan pelanggan kami siap membantu semua pertanyaan, keluhan, dan kebutuhan Anda kapan saja.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Frozen Food Indonesia</h3>
+                    <p>Sebagai pionir dalam industri makanan beku di Indonesia, kami berkomitmen untuk menyediakan produk berkualitas tinggi dengan teknologi pengolahan terkini. Makanan beku bukan sekadar praktis, tapi juga sehat dan lezat.</p>
+                    <div class="news-item">
+                        <div class="news-date">24.11</div>
+                        <div class="news-text">Peluncuran produk buah beku baru dengan varian eksotis dari seluruh Indonesia</div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-date">20.11</div>
+                        <div class="news-text">Pabrik pengolahan baru dengan teknologi pembekuan terkini mulai beroperasi</div>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Layanan Kami</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Ekspor Buah Internasional</a></li>
+                        <li><a href="#">Produk Pizza Beku</a></li>
+                        <li><a href="#">Makanan Khusus Diet</a></li>
+                        <li><a href="#">Ikan & Kerang Segar</a></li>
+                        <li><a href="#">Pengolahan & Pembekuan</a></li>
+                        <li><a href="#">Kemitraan Ritel</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Tautan Cepat</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Beranda</a></li>
+                        <li><a href="#about">Tentang Perusahaan</a></li>
+                        <li><a href="#products">Katalog Produk</a></li>
+                        <li><a href="#services">Layanan Kami</a></li>
+                        <li><a href="#contact">Hubungi Kami</a></li>
+                        <li><a href="#">Kebijakan Privasi</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Hubungi Kami</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Jl. Industri Makanan No. 123, Kawasan Industri Modern, Jakarta 12560</p>
+                    <p><i class="fas fa-phone"></i> (021) 1234-5678</p>
+                    <p><i class="fas fa-envelope"></i> info@frozenfood.co.id</p>
+                    <p><i class="fas fa-clock"></i> Senin-Jumat: 08:00 - 18:00 WIB</p>
+                    <p><i class="fas fa-clock"></i> Sabtu: 08:00 - 14:00 WIB</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 FrozenFood Indonesia. Hak Cipta Dilindungi Undang-Undang. | Terdaftar di BPOM RI | Sertifikasi Halal MUI</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainMenu = document.getElementById('mainMenu');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            mainMenu.classList.toggle('active');
+            
+            // Ubah ikon
+            const icon = mobileMenuBtn.querySelector('i');
+            if (icon.classList.contains('fa-bars')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
+        // Smooth scrolling untuk tautan anchor
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Tutup menu mobile jika terbuka
+                    mainMenu.classList.remove('active');
+                    const icon = mobileMenuBtn.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
